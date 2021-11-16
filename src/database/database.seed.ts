@@ -1,4 +1,4 @@
-import { Schema, connect, model, ConnectOptions } from 'mongoose';
+import { Schema, model } from 'mongoose';
 import { IUser } from '../interfaces/interface.users';
 
 const schema = new Schema<IUser>({
@@ -10,6 +10,7 @@ const UserModel = model<IUser>('User', schema);
 export async function seeder(): Promise<void> {
   const user = new UserModel({
     name: 'John',
+    login: 'johnslogin',
   });
 
   await user.save();
