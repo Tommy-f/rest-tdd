@@ -20,7 +20,8 @@ describe('Test user endpoints', () => {
 
   describe('Get all users', () => {
     it('should return an array of documents', async () => {
-      const response = await request(app).get('/users/');
+      const response = await request(app).get('/api/users/');
+      console.log(response.body);
       expect(response.body).toBeInstanceOf(Array);
     });
   });
