@@ -1,4 +1,4 @@
-import User from '../models/user.model';
+import Users from '../models/user.model';
 
 const presetUsers = [
   {
@@ -20,7 +20,7 @@ const presetUsers = [
 
 export async function seeder(): Promise<void> {
   for (const user of presetUsers) {
-    await new User({
+    await new Users({
       _id: user._id,
       name: user.name,
       login: user.login,
