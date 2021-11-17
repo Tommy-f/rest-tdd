@@ -18,6 +18,6 @@ describe('Test example', () => {
   });
   it('should return an array of documents', async () => {
     const response = await request(app).get('/api/users/');
-    expect(response.body).toBeInstanceOf(Array<Document>());
+    expect(response.body).toBeInstanceOf(Array);
   });
 });
