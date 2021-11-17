@@ -1,6 +1,9 @@
 import { Router } from 'express';
 const router = Router();
 
+// Test routes
+router.get('/');
+
 // Product routes
 router.get('/api/products/');
 router.get('/api/products/:id');
