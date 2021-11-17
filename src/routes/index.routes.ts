@@ -1,5 +1,5 @@
 import express from 'express';
-import { getAllUsers } from '../controllers/user.controller';
+import { getAllUsers, getUser } from '../controllers/user.controller';
 const router = express.Router();
 
 // Test routes
@@ -16,7 +16,7 @@ router.get('/me', (req, res) => {
 
 // // User routes
 router.get('/users/', getAllUsers);
-// router.get('/users/:id');
+router.get('/users/:id', getUser);
 // router.post('/users/');
 // router.delete('/users/:id');
 
