@@ -1,4 +1,4 @@
-import { NotFound, InternalServer } from '../errors/api.errors';
+import { HttpException } from '../errors/api.errors';
 import Users from '../models/user.model';
 import type { Request, Response, NextFunction } from 'express';
 import { Document } from 'mongoose';
@@ -11,10 +11,10 @@ export const getAllUsers = async (
   try {
     const users: Array<Document> = await Users.find();
     if (!users) {
-      next(new NotFound('User'));
+      next(new HttpException(404, 'User Not Found'));
     }
     res.json(users);
   } catch (error) {
-    throw new InternalServer();
+    throw new HttpException(500, 'Internal Error');
   }
 };
