@@ -1,28 +1,28 @@
 import httpStatusCodes from './status.errors';
 
 export class NotFound extends Error {
-  private errorCode = httpStatusCodes.NOT_FOUND;
+  private statusCode = httpStatusCodes.NOT_FOUND;
   constructor(message: string) {
-    super();
+    super(message);
     this.message = `${message} Not Found`;
-    this.errorCode = this.errorCode;
+    this.statusCode = this.statusCode;
   }
 }
 
 export class BadRequest extends Error {
-  private errorCode = httpStatusCodes.BAD_REQUEST;
+  private statusCode = httpStatusCodes.BAD_REQUEST;
   constructor() {
     super();
     this.message = 'Bad Request';
-    this.errorCode = this.errorCode;
+    this.statusCode = this.statusCode;
   }
 }
 
 export class InternalServer extends Error {
-  private errorCode = httpStatusCodes.INTERNAL_SERVER;
+  private statusCode = httpStatusCodes.INTERNAL_SERVER;
   constructor() {
     super();
     this.message = 'Internal Server Error';
-    this.errorCode = this.errorCode;
+    this.statusCode = this.statusCode;
   }
 }

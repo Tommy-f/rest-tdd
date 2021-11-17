@@ -1,23 +1,20 @@
 import { NotFound, InternalServer } from '../errors/api.errors';
-import User from '../models/user.model';
-import { Request, Response, NextFunction } from 'express';
+import Users from '../models/user.model';
+import type { Request, Response, NextFunction } from 'express';
+import { Document } from 'mongoose';
 
-export const getUser = async (
+export const getAllUsers = async (
   req: Request,
   res: Response,
   next: NextFunction
 ): Promise<void> => {
-  let user: Object;
   try {
-    user = await User.findOne({ name: 'Örjan' });
-    console.log(user);
-    if (!user) {
-      console.log('inside');
-      throw new NotFound('User not found');
+    const users: Array<Document> = await Users.find();
+    if (!users) {
+      next(new NotFound('User'));
     }
+    res.json(users);
   } catch (error) {
     throw new InternalServer();
   }
-  res.json(user);
-  //   next();
 };

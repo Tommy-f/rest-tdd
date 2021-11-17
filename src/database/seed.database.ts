@@ -1,10 +1,25 @@
 import User from '../models/user.model';
 
-export async function seeder(): Promise<void> {
-  const user = new User({
+const presetUsers = [
+  {
     name: 'John',
     login: 'johnslogin',
-  });
+  },
+  {
+    name: 'Jane',
+    login: 'johnslogin',
+  },
+  {
+    name: 'Jack',
+    login: 'johnslogin',
+  },
+];
 
-  await user.save();
+export async function seeder(): Promise<void> {
+  for (const user of presetUsers) {
+    await new User({
+      name: user.name,
+      login: user.login,
+    }).save();
+  }
 }
