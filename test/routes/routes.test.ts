@@ -11,11 +11,14 @@ describe('Test user endpoints', () => {
     mongoose.connection.close();
   });
 
-  describe('Get all users', () => {
+  describe('Test endpoint', () => {
     it('should return 200', async () => {
-      const response = await request(app).get('/');
+      const response = await request(app).get('/api/me');
       expect(response.statusCode).toEqual(200);
     });
+  });
+
+  describe('Get all users', () => {
     it('should return an array of documents', async () => {
       const response = await request(app).get('/users/');
       expect(response.body).toBeInstanceOf(Array);

@@ -3,7 +3,7 @@ import { getAllUsers } from '../controllers/user.controller';
 const router = express.Router();
 
 // Test routes
-router.get('/', (req, res) => {
+router.get('/me', (req, res) => {
   res.send({ data: 'Good' });
 });
 
