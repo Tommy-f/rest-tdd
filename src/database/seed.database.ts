@@ -7,5 +7,4 @@ export async function seeder(): Promise<void> {
   });
 
   await user.save();
-  console.log(user.name);
 }

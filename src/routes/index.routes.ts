@@ -1,9 +1,10 @@
 import express from 'express';
-const router = express.Router()
+import { getUser } from '../controllers/user.controller';
+const router = express.Router();
 
 // Test routes
 router.get('/', (req, res) => {
-  res.send({ data: "Good" })
+  res.send({ data: 'Good' });
 });
 
 // // Product routes
@@ -14,7 +15,7 @@ router.get('/', (req, res) => {
 // router.delete('/api/products/:id');
 
 // // User routes
-// router.get('/api/users/');
+router.get('/api/users/', getUser);
 // router.get('/api/users/:id');
 // router.post('/api/users/');
 // router.delete('/api/users/:id');
