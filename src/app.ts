@@ -10,3 +10,5 @@ const app = express();
     console.log(`Listening on ${process.env.PORT}`);
   });
 })();
+
+export default app;
