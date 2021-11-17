@@ -1,10 +1,18 @@
 import request from 'supertest';
 import app from '../../src/app';
-jest.useFakeTimers();
-
-// https://jestjs.io/docs/getting-started#using-babel
+import { seeder } from '../../src/database/seed.database'
 
 describe('Test example', () => {
+
+
+  beforeAll(async () => {
+    await seeder()
+  });
+
+  afterAll(async () => {
+
+  });
+
   it('should return 200', async () => {
     const response = await request(app).get('/');
     expect(response.statusCode).toEqual(200);
