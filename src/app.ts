@@ -6,7 +6,7 @@ import { seeder } from './database/seed.database';
 
 const app = express();
 
-app.use(router);
+app.use('/api', router);
 
 (async () => {
   await connect();

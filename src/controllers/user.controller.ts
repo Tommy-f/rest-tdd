@@ -11,10 +11,11 @@ export const getAllUsers = async (
   try {
     const users: Array<Document> = await Users.find();
     if (!users) {
-      next(new HttpException(404, 'User Not Found'));
+      throw new HttpException(404, 'User Not Found');
     }
     res.json(users);
   } catch (error) {
+    next(error);
     throw new HttpException(500, 'Internal Error');
   }
 };

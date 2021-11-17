@@ -8,22 +8,22 @@ router.get('/', (req, res) => {
 });
 
 // // Product routes
-// router.get('/api/products/');
-// router.get('/api/products/:id');
-// router.post('/api/products/');
-// router.put('/api/products/:id');
-// router.delete('/api/products/:id');
+// router.get('/products/');
+// router.get('/products/:id');
+// router.post('/products/');
+// router.put('/products/:id');
+// router.delete('/products/:id');
 
 // // User routes
-router.get('/api/users/', getAllUsers);
-// router.get('/api/users/:id');
-// router.post('/api/users/');
-// router.delete('/api/users/:id');
+router.get('/users/', getAllUsers);
+// router.get('/users/:id');
+// router.post('/users/');
+// router.delete('/users/:id');
 
 // // Cart routes
-// router.get('/api/carts/:userLogin');
-// router.post('/api/carts/:userLogin/');
-// router.put('/api/carts/:userLogin/:id');
-// router.delete('/api/carts/:userLogin/:id');
+// router.get('/carts/:userLogin');
+// router.post('/carts/:userLogin/');
+// router.put('/carts/:userLogin/:id');
+// router.delete('/carts/:userLogin/:id');
 
 export default router;
