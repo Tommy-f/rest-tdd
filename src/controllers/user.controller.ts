@@ -44,17 +44,12 @@ export const createUser = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const createdUser: Document<IUser> = await new Users({
-      _id: req.body._id,
+    await new Users({
+      _id: req.body.id,
       name: req.body.name,
       login: req.body.login,
     }).save();
-
-    if (!createdUser) {
-      throw new HttpException(500, 'Internal Error');
-    }
-
-    res.json(createdUser);
+    res.status(201).json({ message: 'User Created' });
   } catch (error) {
     next(error);
     throw new HttpException(500, 'Internal Error');

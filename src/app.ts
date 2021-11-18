@@ -6,12 +6,14 @@ import { seeder } from './database/seed.database';
 
 const app = express();
 
-app.use('/api', router);
 app.use(express.json());
+app.use('/api', router);
+
+
 
 (async () => {
   await connect();
-  await seeder();
+  // await seeder();
 
   app.listen(process.env.PORT, () => {
     console.log(`Listening on ${process.env.PORT}`);
