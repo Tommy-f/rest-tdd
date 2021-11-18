@@ -3,6 +3,7 @@ import {
   getAllUsers,
   getUser,
   createUser,
+  deleteUser,
 } from '../controllers/user.controller';
 const router = express.Router();
 
@@ -22,7 +23,7 @@ router.get('/me', (req, res) => {
 router.get('/users/', getAllUsers);
 router.get('/users/:id', getUser);
 router.post('/users/', createUser);
-// router.delete('/users/:id');
+router.delete('/users/:id', deleteUser);
 
 // // Cart routes
 // router.get('/carts/:userLogin');

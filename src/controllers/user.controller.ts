@@ -27,7 +27,7 @@ export const getUser = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const user: Document = await Users.findById({ _id: req.params.id });
+    const user: Document | null = await Users.findById({ _id: req.params.id });
     if (!user) {
       throw new HttpException(404, 'User Not Found');
     }
@@ -44,12 +44,32 @@ export const createUser = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    await new Users({
-      _id: req.body.id,
+    const newUser = await new Users({
+      _id: req.body._id,
       name: req.body.name,
       login: req.body.login,
     }).save();
-    res.status(201).json({ message: 'User Created' });
+    res.status(201).json(newUser);
+  } catch (error) {
+    next(error);
+    throw new HttpException(500, 'Internal Error');
+  }
+};
+
+export const deleteUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const user: Document | null = await Users.findById({ _id: req.params.id });
+    console.log(user);
+    if (!user) {
+      console.log('inside');
+      throw new HttpException(404, 'User Not Found');
+    }
+    await Users.deleteOne({ _id: req.params.id });
+    res.status(200).json({ message: 'User Deleted' });
   } catch (error) {
     next(error);
     throw new HttpException(500, 'Internal Error');

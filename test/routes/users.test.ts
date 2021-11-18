@@ -1,23 +1,21 @@
 import mongoose, { Document } from 'mongoose';
-import supertest from 'supertest'
+import supertest from 'supertest';
 import request from 'supertest';
 import app from '../../src/app';
 import { seeder } from '../../src/database/seed.database';
-import * as userController from '../../src/controllers/user.controller'
-
+import * as userController from '../../src/controllers/user.controller';
 
 export const userPayload = {
-  // _id: 1,
+  _id: 4,
   name: 'Erik',
-  login: 'ErikLogin'
-}
+  login: 'ErikLogin',
+};
 
 const userInput = {
-  id: 1,
-  name: "Erik",
-  login: "ErikLogin"
-}
-
+  _id: 4,
+  name: 'Erik',
+  login: 'ErikLogin',
+};
 
 describe('Test user endpoints', () => {
   beforeAll(async () => {
@@ -44,7 +42,6 @@ describe('Test user endpoints', () => {
   describe('Get a specific user from id', () => {
     it('should return a user document from an id', async () => {
       const response = await request(app).get('/api/users/2');
-      // const expected = response.body as IUser;
       const expected = response.body;
       const actual = { _id: 2, name: 'Jane', login: 'janeslogin' };
       expect(actual).toMatchObject(expected);
@@ -55,21 +52,22 @@ describe('Test user endpoints', () => {
       it('should return the user payload', async () => {
         const createUserServiceMock = jest
           .spyOn(userController, 'createUser')
+          .mockRejectedValueOnce(userPayload);
 
-          .mockRejectedValueOnce(userPayload)
+        const { statusCode, body } = await request(app)
+          .post('/api/users')
+          .send(userInput);
 
-        const { statusCode, body } = await supertest(app)
-          .post('/users')
-          .send(userInput)
+        expect(statusCode).toBe(201);
 
-        expect(statusCode).toBe(200)
+        expect(body).toEqual(userPayload);
 
-        expect(body).toEqual(userPayload)
+        // expect(body).toMatchObject(userPayload);
 
-        expect(createUserServiceMock).toHaveBeenCalledWith(userInput)
-      })
-    })
-  })
+        // createUserServiceMock.mockRestore();
+
+        // expect(createUserServiceMock).toHaveBeenCalledWith(userInput);
+      });
+    });
+  });
 });
-
-

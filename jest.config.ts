@@ -20,24 +20,3 @@ module.exports = {
     '<rootDir>/dist/',
   ],
 };
-
-// export default {
-//   global: {
-//     'ts-jest': {
-//       moduleFileExtensions: ['js', 'jsx', 'json', 'ts', 'tsx'],
-//       transform: {
-//         '^.+\\.(ts|tsx|js)?$': 'ts-jest',
-//       },
-//       globals: {
-//         'ts-jest': {
-//           tsConfig: 'tsconfig.json',
-//         },
-//       },
-//       testMatch: [
-//         '**/?(*.)+(spec|test).ts?(x)',
-//         '**/[a-zA-Z]+/**/*.test[s]?.(ts|js)',
-//         '**/test[s]?/*.+(ts|tsx|js)',
-//       ],
-//     },
-//   },
-// };
