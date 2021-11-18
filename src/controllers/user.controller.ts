@@ -63,9 +63,7 @@ export const deleteUser = async (
 ): Promise<void> => {
   try {
     const user: Document | null = await Users.findById({ _id: req.params.id });
-    console.log(user);
     if (!user) {
-      console.log('inside');
       throw new HttpException(404, 'User Not Found');
     }
     await Users.deleteOne({ _id: req.params.id });
