@@ -1,8 +1,23 @@
-import { IUser } from './../../src/interfaces/users.interface';
 import mongoose, { Document } from 'mongoose';
+import supertest from 'supertest'
 import request from 'supertest';
 import app from '../../src/app';
 import { seeder } from '../../src/database/seed.database';
+import * as userController from '../../src/controllers/user.controller'
+
+
+export const userPayload = {
+  // _id: 1,
+  name: 'Erik',
+  login: 'ErikLogin'
+}
+
+const userInput = {
+  id: 1,
+  name: "Erik",
+  login: "ErikLogin"
+}
+
 
 describe('Test user endpoints', () => {
   beforeAll(async () => {
@@ -35,4 +50,26 @@ describe('Test user endpoints', () => {
       expect(actual).toMatchObject(expected);
     });
   });
+  describe('User registration', () => {
+    describe('given the username and password are valid', () => {
+      it('should return the user payload', async () => {
+        const createUserServiceMock = jest
+          .spyOn(userController, 'createUser')
+
+          .mockRejectedValueOnce(userPayload)
+
+        const { statusCode, body } = await supertest(app)
+          .post('/users')
+          .send(userInput)
+
+        expect(statusCode).toBe(200)
+
+        expect(body).toEqual(userPayload)
+
+        expect(createUserServiceMock).toHaveBeenCalledWith(userInput)
+      })
+    })
+  })
 });
+
+
