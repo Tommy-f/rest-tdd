@@ -63,6 +63,9 @@ export const updateProduct = async (
   const filter = { id: req.params.id };
   const update: Document<IProduct> = req.body;
   try {
+    if (update.hasOwnProperty('id')) {
+      throw new HttpException(400, 'Bad Request: Cannot update id');
+    }
     const updatedProduct: Document | null = await Products.findOneAndUpdate(
       filter,
       update,
