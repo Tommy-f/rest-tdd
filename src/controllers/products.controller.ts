@@ -19,3 +19,21 @@ export const getAllProducts = async (
     return res.status(error.status).json({ message: error.message });
   }
 };
+
+export const getProduct = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<Response> => {
+  try {
+    const product: Document | null = await Products.findOne({
+      id: req.params.id,
+    });
+    if (!product) {
+      throw new HttpException(404, 'Product Not Found');
+    }
+    return res.status(200).json(product);
+  } catch (error) {
+    return res.status(error.status).json({ message: error.message });
+  }
+};
