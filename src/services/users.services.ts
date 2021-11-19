@@ -4,7 +4,6 @@ import { HttpException } from '../errors/api.errors'
 import { isEmpty } from '../utils/utils'
 
 export const findUserById = async (login: string): Promise<IUser> => {
-
   if (isEmpty(login)) throw new HttpException(400, "No id provided in the query");
 
   const findUser: IUser = await Users.findOne({ login: login });
@@ -14,7 +13,7 @@ export const findUserById = async (login: string): Promise<IUser> => {
 }
 
 
-export const createNewUser = async (userData: any): Promise<IUser> => {
+export const createNewUser = async (userData: IUser): Promise<IUser> => {
   if (isEmpty(userData)) throw new HttpException(400, "No user data provided in the query");
 
   const findUser: IUser = await Users.findOne({ login: userData.login });
@@ -24,7 +23,6 @@ export const createNewUser = async (userData: any): Promise<IUser> => {
     name: userData.name,
     login: userData.login,
   }).save();
-
 
   return userData
 }

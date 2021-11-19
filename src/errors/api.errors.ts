@@ -10,6 +10,8 @@ export class HttpException extends Error {
         return 'Not Found';
       case 408:
         return 'Request Timeout';
+      case 409:
+        return 'Conflict';
       case 500:
         return 'Internal Server Error';
       case 501:

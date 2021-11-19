@@ -3,6 +3,7 @@ import Users from '../models/users.model';
 import type { Request, Response, NextFunction } from 'express';
 import { Document } from 'mongoose';
 import { findUserById, createNewUser } from '../services/users.services'
+import { IUser } from '../interfaces/users.interface'
 
 export const getAllUsers = async (
   req: Request,
@@ -40,7 +41,7 @@ export const createUser = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const newUser = req.body
+    const newUser: IUser = req.body
     await createNewUser(newUser);
 
     res.status(201).json({ data: newUser, message: 'New user added!' });
