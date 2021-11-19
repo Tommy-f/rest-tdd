@@ -49,7 +49,7 @@ export const createUser = async (
     }).save();
     return res.status(201).json(newUser);
   } catch (error) {
-    throw new HttpException(500, 'Internal Error');
+    throw new HttpException(500, 'Could not create user');
   }
 };
 

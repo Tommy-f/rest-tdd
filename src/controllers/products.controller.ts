@@ -51,7 +51,7 @@ export const createProduct = async (
     }).save();
     return res.status(201).json(newProduct);
   } catch (error) {
-    throw new HttpException(500, 'Internal Error');
+    throw new HttpException(500, 'Could not create product');
   }
 };
 
@@ -64,7 +64,7 @@ export const updateProduct = async (
   const update: Document<IProduct> = req.body;
   try {
     if (update.hasOwnProperty('id')) {
-      throw new HttpException(400, 'Bad Request: Cannot update id');
+      throw new HttpException(400, 'Cannot update id');
     }
     const updatedProduct: Document | null = await Products.findOneAndUpdate(
       filter,
@@ -76,6 +76,6 @@ export const updateProduct = async (
       .status(201)
       .json({ message: 'Product updated!', updatedProduct });
   } catch (error) {
-    throw new HttpException(500, 'Internal Error');
+    throw new HttpException(500, 'Could not update product');
   }
 };
