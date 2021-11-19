@@ -25,7 +25,9 @@ export const getUser = async (
   next: NextFunction
 ): Promise<Response> => {
   try {
-    const user: Document | null = await Users.findById({ _id: req.params.id });
+    const user: Document | null = await Users.findOne({
+      login: req.params.login,
+    });
     if (!user) {
       throw new HttpException(404, 'User Not Found');
     }
@@ -57,11 +59,13 @@ export const deleteUser = async (
   next: NextFunction
 ): Promise<Response> => {
   try {
-    const user: Document | null = await Users.findById({ _id: req.params.id });
+    const user: Document | null = await Users.findOne({
+      login: req.params.login,
+    });
     if (!user) {
       throw new HttpException(404, 'User Not Found');
     }
-    await Users.deleteOne({ _id: req.params.id });
+    await user.delete();
     return res.status(200).json({ message: 'User Deleted' });
   } catch (error) {
     return res.status(error.status).json({ message: error.message });

@@ -8,15 +8,14 @@ export const getAllProducts = async (
   req: Request,
   res: Response,
   next: NextFunction
-): Promise<void> => {
+): Promise<Response> => {
   try {
-    const products: Array<IProduct> = await Products.find();
+    const products: Array<Document> = await Products.find();
     if (!products) {
       throw new HttpException(404, 'No Products Found');
     }
-    res.json(products);
+    return res.status(200).json(products);
   } catch (error) {
-    next(error);
-    throw new HttpException(500, 'Internal Error');
+    return res.status(error.status).json({ message: error.message });
   }
 };

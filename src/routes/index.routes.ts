@@ -23,9 +23,9 @@ router.get('/products/');
 
 // // User routes
 router.get('/users/', getAllUsers);
-router.get('/users/:id', getUser);
+router.get('/users/:login', getUser);
 router.post('/users/', createUser);
-router.delete('/users/:id', deleteUser);
+router.delete('/users/:login', deleteUser);
 
 // // Cart routes
 // router.get('/carts/:userLogin');
