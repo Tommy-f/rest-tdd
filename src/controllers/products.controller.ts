@@ -37,3 +37,20 @@ export const getProduct = async (
     return res.status(error.status).json({ message: error.message });
   }
 };
+
+export const createProduct = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<Response> => {
+  try {
+    const newProduct = await new Products({
+      id: req.body.id,
+      name: req.body.name,
+      price: req.body.price,
+    }).save();
+    return res.status(201).json(newProduct);
+  } catch (error) {
+    throw new HttpException(500, 'Internal Error');
+  }
+};

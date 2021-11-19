@@ -5,7 +5,11 @@ import {
   createUser,
   deleteUser,
 } from '../controllers/users.controller';
-import { getAllProducts, getProduct } from '../controllers/products.controller';
+import {
+  createProduct,
+  getAllProducts,
+  getProduct,
+} from '../controllers/products.controller';
 
 const router = express.Router();
 
@@ -17,7 +21,7 @@ router.get('/me', (req, res) => {
 // // Product routes
 router.get('/products/', getAllProducts);
 router.get('/products/:id', getProduct);
-// router.post('/products/');
+router.post('/products/', createProduct);
 // router.put('/products/:id');
 // router.delete('/products/:id');
 
