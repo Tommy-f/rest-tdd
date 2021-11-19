@@ -9,6 +9,7 @@ import {
   createProduct,
   getAllProducts,
   getProduct,
+  updateProduct,
 } from '../controllers/products.controller';
 
 const router = express.Router();
@@ -22,7 +23,7 @@ router.get('/me', (req, res) => {
 router.get('/products/', getAllProducts);
 router.get('/products/:id', getProduct);
 router.post('/products/', createProduct);
-// router.put('/products/:id');
+router.put('/products/:id', updateProduct);
 // router.delete('/products/:id');
 
 // // User routes

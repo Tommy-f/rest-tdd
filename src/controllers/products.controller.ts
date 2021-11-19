@@ -54,3 +54,25 @@ export const createProduct = async (
     throw new HttpException(500, 'Internal Error');
   }
 };
+
+export const updateProduct = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<Response> => {
+  const filter = { id: req.params.id };
+  const update: Document<IProduct> = req.body;
+  try {
+    const updatedProduct: Document | null = await Products.findOneAndUpdate(
+      filter,
+      update,
+      { new: true }
+    );
+
+    return res
+      .status(201)
+      .json({ message: 'Product updated!', updatedProduct });
+  } catch (error) {
+    throw new HttpException(500, 'Internal Error');
+  }
+};

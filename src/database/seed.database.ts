@@ -1,7 +1,9 @@
+import { IUser } from './../interfaces/users.interface';
+import { IProduct } from './../interfaces/products.interface';
 import Users from '../models/users.model';
 import Products from '../models/products.model';
 
-const presetUsers = [
+const presetUsers: Array<IUser> = [
   {
     name: 'John',
     login: 'johnslogin',
@@ -16,19 +18,19 @@ const presetUsers = [
   },
 ];
 
-const presetProducts = [
+const presetProducts: Array<IProduct> = [
   {
-    id: 1,
+    id: 'p1',
     name: 'Product 1',
     price: 100,
   },
   {
-    id: 2,
+    id: 'p2',
     name: 'Product 2',
     price: 200,
   },
   {
-    id: 3,
+    id: 'p3',
     name: 'Product 3',
     price: 300,
   },
