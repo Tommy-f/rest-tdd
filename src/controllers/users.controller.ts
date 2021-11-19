@@ -1,8 +1,7 @@
 import { HttpException } from '../errors/api.errors';
-import Users from '../models/user.model';
+import Users from '../models/users.model';
 import type { Request, Response, NextFunction } from 'express';
 import { Document } from 'mongoose';
-import { IUser } from '../interfaces/users.interface';
 
 export const getAllUsers = async (
   req: Request,
@@ -45,7 +44,6 @@ export const createUser = async (
 ): Promise<void> => {
   try {
     const newUser = await new Users({
-      _id: req.body._id,
       name: req.body.name,
       login: req.body.login,
     }).save();
@@ -62,11 +60,11 @@ export const deleteUser = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const user: Document | null = await Users.findById({ _id: req.params.id });
+    const user: Document | null = await Users.findById({ _id: req.params._id });
     if (!user) {
       throw new HttpException(404, 'User Not Found');
     }
-    await Users.deleteOne({ _id: req.params.id });
+    await Users.deleteOne({ _id: req.params._id });
     res.status(200).json({ message: 'User Deleted' });
   } catch (error) {
     next(error);

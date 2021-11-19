@@ -3,16 +3,14 @@ import supertest from 'supertest';
 import request from 'supertest';
 import app from '../../src/app';
 import { seeder } from '../../src/database/seed.database';
-import * as userController from '../../src/controllers/user.controller';
+import * as userController from '../../src/controllers/users.controller';
 
 export const userPayload = {
-  _id: 4,
   name: 'Erik',
   login: 'ErikLogin',
 };
 
 const userInput = {
-  _id: 4,
   name: 'Erik',
   login: 'ErikLogin',
 };
@@ -43,7 +41,7 @@ describe('Test user endpoints', () => {
     it('should return a user document from an id', async () => {
       const response = await request(app).get('/api/users/2');
       const expected = response.body;
-      const actual = { _id: 2, name: 'Jane', login: 'janeslogin' };
+      const actual = { name: 'Jane', login: 'janeslogin' };
       expect(actual).toMatchObject(expected);
     });
   });
