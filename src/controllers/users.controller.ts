@@ -7,16 +7,15 @@ export const getAllUsers = async (
   req: Request,
   res: Response,
   next: NextFunction
-): Promise<void> => {
+): Promise<Response> => {
   try {
     const users: Array<Document> = await Users.find();
-    if (!users) {
+    if (users.length === 0) {
       throw new HttpException(404, 'Users Not Found');
     }
-    res.json(users);
+    return res.status(200).json(users);
   } catch (error) {
-    next(error);
-    throw new HttpException(500, 'Internal Error');
+    return res.status(error.status).json({ message: error.message });
   }
 };
 
@@ -24,16 +23,15 @@ export const getUser = async (
   req: Request,
   res: Response,
   next: NextFunction
-): Promise<void> => {
+): Promise<Response> => {
   try {
     const user: Document | null = await Users.findById({ _id: req.params.id });
     if (!user) {
       throw new HttpException(404, 'User Not Found');
     }
-    res.json(user);
+    return res.status(200).json(user);
   } catch (error) {
-    next(error);
-    throw new HttpException(500, 'Internal Error');
+    return res.status(error.status).json({ message: error.message });
   }
 };
 
@@ -41,15 +39,14 @@ export const createUser = async (
   req: Request,
   res: Response,
   next: NextFunction
-): Promise<void> => {
+): Promise<Response> => {
   try {
     const newUser = await new Users({
       name: req.body.name,
       login: req.body.login,
     }).save();
-    res.status(201).json(newUser);
+    return res.status(201).json(newUser);
   } catch (error) {
-    next(error);
     throw new HttpException(500, 'Internal Error');
   }
 };
@@ -58,16 +55,15 @@ export const deleteUser = async (
   req: Request,
   res: Response,
   next: NextFunction
-): Promise<void> => {
+): Promise<Response> => {
   try {
-    const user: Document | null = await Users.findById({ _id: req.params._id });
+    const user: Document | null = await Users.findById({ _id: req.params.id });
     if (!user) {
       throw new HttpException(404, 'User Not Found');
     }
-    await Users.deleteOne({ _id: req.params._id });
-    res.status(200).json({ message: 'User Deleted' });
+    await Users.deleteOne({ _id: req.params.id });
+    return res.status(200).json({ message: 'User Deleted' });
   } catch (error) {
-    next(error);
-    throw new HttpException(500, 'Internal Error');
+    return res.status(error.status).json({ message: error.message });
   }
 };
