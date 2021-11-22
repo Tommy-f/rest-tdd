@@ -20,6 +20,11 @@ export const findUserById = async (login: string): Promise<IUser> => {
 export const createNewUser = async (userData: IUser): Promise<IUser> => {
   if (isEmpty(userData)) {
     throw new HttpException(400, 'No user data provided in the query');
+  } else if (
+    !userData.hasOwnProperty('name') ||
+    !userData.hasOwnProperty('login')
+  ) {
+    throw new HttpException(400, 'Invalid body');
   }
 
   const findUser: IUser = await Users.findOne({ login: userData.login });

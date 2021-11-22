@@ -41,6 +41,7 @@ describe('Test user endpoints', () => {
   describe('Create a new user object', () => {
     beforeEach(async () => {
       await mongoose.connection.dropDatabase();
+      await seeder();
     });
 
     it('should return 201', async () => {
@@ -64,6 +65,25 @@ describe('Test user endpoints', () => {
         .send({ name: 'Alex', login: 'alexlösenord' });
 
       expect(response.body.message).toBe('New user added!');
+    });
+    it('should return 409', async () => {
+      const response = await request(app)
+        .post('/api/users/')
+        .send({ name: 'John', login: 'johnslogin' });
+
+      expect(response.statusCode).toBe(409);
+    });
+    it('should return 400', async () => {
+      const response = await request(app).post('/api/users/').send({});
+
+      expect(response.statusCode).toBe(400);
+    });
+    it('should return 400', async () => {
+      const response = await request(app)
+        .post('/api/users/')
+        .send({ name: 'Alex' });
+
+      expect(response.statusCode).toBe(400);
     });
   });
 });
