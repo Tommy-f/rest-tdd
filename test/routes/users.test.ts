@@ -90,6 +90,11 @@ describe('Test user endpoints', () => {
       it('should return 200', async () => {
         const response = await request(app).delete('/api/users/janeslogin');
         expect(response.statusCode).toBe(200);
+        expect(response.body.message).toBe('User deleted!');
+      });
+      it('should return 404', async () => {
+        const response = await request(app).delete('/api/users/jayslogin');
+        expect(response.statusCode).toBe(404);
       });
     });
   });

@@ -39,3 +39,16 @@ export const createNewUser = async (userData: IUser): Promise<IUser> => {
 
   return newUser;
 };
+
+export const deleteExistingUser = async (login: string): Promise<void> => {
+  if (!login) {
+    throw new HttpException(400, 'No id provided in the query');
+  }
+
+  const user: Document | null = await Users.findOne({ login: login });
+  if (!user) {
+    throw new HttpException(404, `User ${login} does not exist`);
+  }
+
+  await user.delete();
+};
