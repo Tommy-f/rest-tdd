@@ -85,17 +85,22 @@ describe('Test user endpoints', () => {
 
       expect(response.statusCode).toBe(400);
     });
+  });
 
-    describe('Delete a user', () => {
-      it('should return 200', async () => {
-        const response = await request(app).delete('/api/users/janeslogin');
-        expect(response.statusCode).toBe(200);
-        expect(response.body.message).toBe('User deleted!');
-      });
-      it('should return 404', async () => {
-        const response = await request(app).delete('/api/users/jayslogin');
-        expect(response.statusCode).toBe(404);
-      });
+  describe('Delete a user', () => {
+    it('should return 200 and message "User deleted!"', async () => {
+      const response = await request(app).delete('/api/users/janeslogin');
+      expect(response.statusCode).toBe(200);
+      expect(response.body.message).toBe('User deleted!');
+    });
+    it('should return 404', async () => {
+      const response = await request(app).delete('/api/users/NotFound');
+      expect(response.statusCode).toBe(404);
+    });
+    it('should throw an exception 404', async () => {
+      expect(
+        async () => await request(app).delete('/api/users/NotFound')
+      ).rejects.toThrow();
     });
   });
 });
