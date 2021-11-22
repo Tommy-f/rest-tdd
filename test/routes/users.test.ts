@@ -85,5 +85,12 @@ describe('Test user endpoints', () => {
 
       expect(response.statusCode).toBe(400);
     });
+
+    describe('Delete a user', () => {
+      it('should return 200', async () => {
+        const response = await request(app).delete('/api/users/janeslogin');
+        expect(response.statusCode).toBe(200);
+      });
+    });
   });
 });
