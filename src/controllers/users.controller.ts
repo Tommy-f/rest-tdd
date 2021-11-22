@@ -28,8 +28,8 @@ export const getUser = async (
 ): Promise<void> => {
   try {
     const userData = await findUserById(req.params.login);
-    const name = userData.name
-    const login = userData.login
+    const name = userData.name;
+    const login = userData.login;
     res.status(200).json({ login, name });
   } catch (error) {
     next(error);
