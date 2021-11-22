@@ -1,12 +1,13 @@
 export class HttpException extends Error {
   public status: number;
   public message: string;
+  public name: string;
 
   private errorName(): string {
     switch (this.status) {
       case 400:
         return 'Bad Request';
-      case 401:
+      case 404:
         return 'Not Found';
       case 408:
         return 'Request Timeout';
@@ -25,8 +26,8 @@ export class HttpException extends Error {
 
   constructor(status: number, message: string) {
     super(message);
-    this.name = this.errorName();
     this.status = status;
     this.message = message;
+    this.name = this.errorName();
   }
 }

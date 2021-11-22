@@ -1,20 +1,9 @@
 import mongoose, { Document } from 'mongoose';
-// import supertest from 'supertest';
 import request from 'supertest';
 import app from '../../src/app';
 import { seeder } from '../../src/database/seed.database';
 import { IUser } from '../../src/interfaces/users.interface';
-// import * as userController from '../../src/controllers/users.controller';
 
-export const userPayload = {
-  name: 'Erik',
-  login: 'ErikLogin',
-};
-
-const userInput = {
-  name: 'Erik',
-  login: 'ErikLogin',
-};
 
 describe('Test user endpoints', () => {
   beforeAll(async () => {
