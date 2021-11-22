@@ -1,3 +1,4 @@
+import { Document } from 'mongoose';
 import { IUser } from '../interfaces/users.interface';
 import Users from '../models/users.model';
 import { HttpException } from '../errors/api.errors';

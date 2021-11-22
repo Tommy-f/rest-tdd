@@ -39,8 +39,9 @@ describe('Test user endpoints', () => {
 
   describe('Get a specific user from id', () => {
     it('should return a user document from an id', async () => {
-      const response = await request(app).get('/api/users/2');
-      const expected = response.body;
+      const response = await request(app).get('/api/users/janeslogin');
+      const { name, login } = response.body.data;
+      const expected = { name: name, login: login };
       const actual = { name: 'Jane', login: 'janeslogin' };
       expect(actual).toMatchObject(expected);
     });

@@ -2,8 +2,8 @@ import { HttpException } from '../errors/api.errors';
 import Users from '../models/users.model';
 import type { Request, Response, NextFunction } from 'express';
 import { Document } from 'mongoose';
-import { findUserById, createNewUser } from '../services/users.services'
-import { IUser } from '../interfaces/users.interface'
+import { findUserById, createNewUser } from '../services/users.services';
+import { IUser } from '../interfaces/users.interface';
 
 export const getAllUsers = async (
   req: Request,
@@ -17,7 +17,7 @@ export const getAllUsers = async (
     }
     return res.status(200).json(users);
   } catch (error) {
-    next(error)
+    next(error);
   }
 };
 
@@ -41,7 +41,7 @@ export const createUser = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const newUser: IUser = req.body
+    const newUser: IUser = req.body;
     await createNewUser(newUser);
 
     res.status(201).json({ data: newUser, message: 'New user added!' });
@@ -65,6 +65,6 @@ export const deleteUser = async (
     await user.delete();
     return res.status(200).json({ message: 'User Deleted' });
   } catch (error) {
-    next(error)
+    next(error);
   }
 };
