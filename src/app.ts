@@ -11,7 +11,7 @@ app.use('/api', router);
 
 (async () => {
   await connect();
-  await seeder();
+  // await seeder();
 
   app.listen(process.env.PORT, () => {
     console.log(`Listening on ${process.env.PORT}`);
