@@ -30,17 +30,24 @@ describe('Test product endpoints', () => {
       expect(response.body).toBeInstanceOf(Array);
     });
 
+    describe('Get product by id', () => {
+      it('should return 200', async () => {
+        const response = await request(app).get('/api/products/p1');
+        expect(response.statusCode).toEqual(200);
+      });
+    });
+
     it('should return 204 if no products was found', async () => {
       await mongoose.connection.dropDatabase();
       const response = await request(app).get('/api/products');
       expect(response.statusCode).toEqual(204);
     });
   });
+  it('adds a Product to the database', async () => {
+    const response = await request(app)
+      .post('/api/products')
+      .send({ id: "4", name: 'Product 4', price: 399 })
 
-  describe('Get product by id', () => {
-    it('should return 200', async () => {
-      const response = await request(app).get('/api/products/p1');
-      expect(response.statusCode).toEqual(200);
-    });
+    expect(response.statusCode).toBe(201)
   });
 });
