@@ -31,6 +31,7 @@ router.get('/users/', getAllUsers);
 router.get('/users/:login', getUser);
 router.post('/users/', createUser);
 router.delete('/users/:login', deleteUser);
+router.delete('/users/', deleteUser);
 
 // // Cart routes
 // router.get('/carts/:userLogin');

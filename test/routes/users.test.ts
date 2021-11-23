@@ -97,10 +97,9 @@ describe('Test user endpoints', () => {
       const response = await request(app).delete('/api/users/NotFound');
       expect(response.statusCode).toBe(404);
     });
-    it('should throw an exception 404', async () => {
-      expect(
-        async () => await request(app).delete('/api/users/NotFound')
-      ).rejects.toThrow();
+    it('should return 400', async () => {
+      const response = await request(app).delete('/api/users/');
+      expect(response.statusCode).toBe(400);
     });
   });
 });

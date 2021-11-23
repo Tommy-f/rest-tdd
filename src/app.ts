@@ -13,9 +13,12 @@ app.use('/api', router);
   await connect();
   // await seeder();
 
-  app.listen(process.env.PORT, () => {
-    console.log(`Listening on ${process.env.PORT}`);
-  });
+  app.listen(
+    process.env.NODE_ENV === 'test' ? undefined : process.env.PORT,
+    () => {
+      console.log(`Listening on ${process.env.PORT}`);
+    }
+  );
 })();
 
 export default app;
