@@ -19,6 +19,13 @@ describe('Test product endpoints', () => {
     });
   });
 
+  describe('Get product by id', () => {
+    it('should return 200', async () => {
+      const response = await request(app).get('/api/products/p1');
+      expect(response.statusCode).toEqual(200);
+    });
+  });
+
   describe('Get all products', () => {
     it('should return 200', async () => {
       const response = await request(app).get('/api/products');
@@ -34,13 +41,6 @@ describe('Test product endpoints', () => {
       await mongoose.connection.dropDatabase();
       const response = await request(app).get('/api/products');
       expect(response.statusCode).toEqual(204);
-    });
-  });
-
-  describe('Get product by id', () => {
-    it('should return 200', async () => {
-      const response = await request(app).get('/api/products/p1');
-      expect(response.statusCode).toEqual(200);
     });
   });
 });
