@@ -5,6 +5,8 @@ export class HttpException extends Error {
 
   private errorName(): string {
     switch (this.status) {
+      case 204:
+        return 'No Content';
       case 400:
         return 'Bad Request';
       case 404:

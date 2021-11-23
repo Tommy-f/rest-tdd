@@ -11,8 +11,8 @@ export const getAllProducts = async (
 ): Promise<Response> => {
   try {
     const products: Array<Document> = await Products.find();
-    if (!products) {
-      throw new HttpException(404, 'No Products Found');
+    if (!products || products.length === 0) {
+      throw new HttpException(204, 'No products found');
     }
     return res.status(200).json(products);
   } catch (error) {

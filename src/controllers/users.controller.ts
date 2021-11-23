@@ -16,8 +16,8 @@ export const getAllUsers = async (
 ): Promise<Response> => {
   try {
     const users: Array<Document> = await Users.find();
-    if (users.length === 0) {
-      throw new HttpException(404, 'Users Not Found');
+    if (!users || users.length === 0) {
+      throw new HttpException(204, 'No users found');
     }
     return res.status(200).json(users);
   } catch (error) {
