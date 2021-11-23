@@ -4,7 +4,7 @@ import app from '../../src/app';
 import { IProduct } from '../../src/interfaces/products.interface';
 import { seeder } from '../../src/database/seed.database';
 
-describe('Test user endpoints', () => {
+describe('Test product endpoints', () => {
   beforeAll(async () => {
     await seeder();
   });
@@ -37,7 +37,7 @@ describe('Test user endpoints', () => {
     });
   });
 
-  describe('Get product by login query', () => {
+  describe('Get product by id', () => {
     it('should return 200', async () => {
       const response = await request(app).get('/api/products/p1');
       expect(response.statusCode).toEqual(200);

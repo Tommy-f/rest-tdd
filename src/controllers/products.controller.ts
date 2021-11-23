@@ -30,11 +30,11 @@ export const getProduct = async (
       id: req.params.id,
     });
     if (!product) {
-      throw new HttpException(404, 'Product Not Found');
+      throw new HttpException(404, 'Product not found');
     }
     return res.status(200).json(product);
   } catch (error) {
-    return res.status(error.status).json({ message: error.message });
+    next(error);
   }
 };
 
