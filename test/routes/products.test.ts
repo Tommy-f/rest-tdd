@@ -36,4 +36,11 @@ describe('Test user endpoints', () => {
       expect(response.statusCode).toEqual(204);
     });
   });
+
+  describe('Get product by login query', () => {
+    it('should return 200', async () => {
+      const response = await request(app).get('/api/products/p1');
+      expect(response.statusCode).toEqual(200);
+    });
+  });
 });
