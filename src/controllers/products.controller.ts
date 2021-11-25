@@ -82,7 +82,7 @@ export const updateProduct = async (
 };
 
 
-export const deleteUser = async (
+export const deleteProduct = async (
   req: Request,
   res: Response,
   next: NextFunction
