@@ -11,7 +11,7 @@ app.use('/api', router);
 
 (async () => {
   await connect();
-  // await seeder();
+  await seeder();
 
   app.listen(
     process.env.NODE_ENV === 'test' ? undefined : process.env.PORT,

@@ -3,6 +3,7 @@ import { HttpException } from '../errors/api.errors';
 import Products from '../models/products.model';
 import type { Request, Response, NextFunction } from 'express';
 import { Document } from 'mongoose';
+import { couldStartTrivia } from 'typescript';
 
 export const getAllProducts = async (
   req: Request,
@@ -62,10 +63,12 @@ export const updateProduct = async (
 ): Promise<Response> => {
   const filter = { id: req.params.id };
   const update: Document<IProduct> = req.body;
+  console.log(update);
   try {
     if (update.hasOwnProperty('id')) {
       throw new HttpException(400, 'Cannot update id');
     }
+    console.log('HERE');
     const updatedProduct: Document | null = await Products.findOneAndUpdate(
       filter,
       update,
@@ -74,7 +77,7 @@ export const updateProduct = async (
 
     return res
       .status(201)
-      .json({ message: 'Product updated!', updatedProduct });
+      .json({ message: 'Product updated!', data: updatedProduct });
   } catch (error) {
     throw new HttpException(500, 'Could not update product');
   }

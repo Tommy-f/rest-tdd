@@ -11,6 +11,7 @@ import {
   getProduct,
   updateProduct,
 } from '../controllers/products.controller';
+import { getCart } from '../controllers/cart.controller';
 
 const router = express.Router();
 
@@ -34,7 +35,7 @@ router.delete('/users/:login', deleteUser);
 router.delete('/users/', deleteUser);
 
 // // Cart routes
-// router.get('/carts/:userLogin');
+router.get('/carts/:userLogin', getCart);
 // router.post('/carts/:userLogin/');
 // router.put('/carts/:userLogin/:id');
 // router.delete('/carts/:userLogin/:id');

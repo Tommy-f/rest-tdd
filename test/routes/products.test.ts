@@ -26,6 +26,24 @@ describe('Test product endpoints', () => {
     });
   });
 
+  describe('Update a product', () => {
+    it('should return 201', async () => {
+      const response = await request(app).put('/api/products/p1').send({
+        price: 1000,
+      });
+      expect(response.statusCode).toEqual(201);
+      expect(response.body.data.price).toEqual(1000);
+    });
+    it('should return 400 and message "Cannot update id"', async () => {
+      const response = await request(app).put('/api/products/p1').send({
+        id: 'p1',
+        price: 1000,
+      });
+      expect(response.statusCode).toEqual(400);
+      expect(response.body.message).toEqual('Cannot update id');
+    });
+  });
+
   describe('Get all products', () => {
     it('should return 200', async () => {
       const response = await request(app).get('/api/products');
