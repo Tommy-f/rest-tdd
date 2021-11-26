@@ -1,6 +1,10 @@
 // import Users from './'
 
-export interface ICart {
+import { Document } from 'mongoose';
+import { IUser } from './users.interface';
+
+export interface ICart extends Document {
+  userId?: IUser['login'];
   products: ICartProduct[];
 }
 

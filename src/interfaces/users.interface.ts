@@ -1,4 +1,4 @@
 export interface IUser {
-  name: string;
+  name?: string;
   login: string;
 }

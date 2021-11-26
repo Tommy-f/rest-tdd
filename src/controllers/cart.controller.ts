@@ -37,7 +37,7 @@ export const addItemToCart = async (
   const userId = req.params.userLogin;
   const { productId, amount } = req.body as ICartProduct;
   try {
-    let cart: any = await Carts.findOne({ userId });
+    let cart = (await Carts.findOne({ userId })) as ICart;
     console.log(cart);
     if (!cart) {
       cart = await new Carts({
@@ -52,7 +52,9 @@ export const addItemToCart = async (
       throw new HttpException(404, `Product with id ${productId} not found`);
     }
 
-    const cartItem = cart.products.find((p: any) => p.productId === productId);
+    const cartItem = cart.products.find(
+      (p: ICartProduct) => p.productId === productId
+    );
     if (cartItem) {
       cartItem.amount += amount;
     } else {
