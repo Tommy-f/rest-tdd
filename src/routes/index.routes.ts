@@ -10,6 +10,7 @@ import {
   getAllProducts,
   getProduct,
   updateProduct,
+  deleteProduct
 } from '../controllers/products.controller';
 import { getCart } from '../controllers/cart.controller';
 
@@ -25,7 +26,7 @@ router.get('/products/', getAllProducts);
 router.get('/products/:id', getProduct);
 router.post('/products/', createProduct);
 router.put('/products/:id', updateProduct);
-// router.delete('/products/:id');
+router.delete('/products/:id', deleteProduct);
 
 // // User routes
 router.get('/users/', getAllUsers);

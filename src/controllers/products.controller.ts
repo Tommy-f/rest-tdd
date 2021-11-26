@@ -3,7 +3,7 @@ import { HttpException } from '../errors/api.errors';
 import Products from '../models/products.model';
 import type { Request, Response, NextFunction } from 'express';
 import { Document } from 'mongoose';
-import { couldStartTrivia } from 'typescript';
+import { deleteExistingProduct } from '../services/products.services';
 
 export const getAllProducts = async (
   req: Request,
@@ -80,5 +80,18 @@ export const updateProduct = async (
       .json({ message: 'Product updated!', data: updatedProduct });
   } catch (error) {
     throw new HttpException(500, 'Could not update product');
+  }
+};
+
+export const deleteProduct = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<Response> => {
+  try {
+    await deleteExistingProduct(req.params.id);
+    return res.status(200).json({ message: 'Product deleted!' });
+  } catch (error) {
+    next(error);
   }
 };
