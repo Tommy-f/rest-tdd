@@ -38,17 +38,30 @@ export const addItemToCart = async (
   const { productId, amount } = req.body as ICartProduct;
   try {
     let cart: ICart = await Carts.findOne({ userId });
+    console.log(cart);
     if (!cart) {
       cart = await new Carts({
         userId: userId,
         products: [],
       }).save();
     }
+
     const product: IProduct = await Products.findOne({ productId: productId });
     if (!product) {
       throw new HttpException(404, `Product with id ${productId} not found`);
     }
-    cart.products.push({ productId, amount });
+
+    const cartItem = cart.products.find((p) => p.productId === productId);
+    if (cartItem) {
+      cartItem.amount += amount;
+    } else {
+      cart.products.push({
+        productId: productId,
+        amount: amount,
+      });
+    }
+
+    // return res.status(200).json(cart);
   } catch (error) {
     next(error);
   }
