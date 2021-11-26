@@ -12,7 +12,7 @@ import {
   updateProduct,
   deleteProduct,
 } from '../controllers/products.controller';
-import { getCart } from '../controllers/cart.controller';
+import { addItemToCart, getCart } from '../controllers/cart.controller';
 
 const router = express.Router();
 
@@ -37,7 +37,7 @@ router.delete('/users/', deleteUser);
 
 // // Cart routes
 router.get('/carts/:userLogin', getCart);
-router.post('/carts/:userLogin');
+router.post('/carts/:userLogin', addItemToCart);
 // router.put('/carts/:userLogin/:id');
 // router.delete('/carts/:userLogin/:id');
 

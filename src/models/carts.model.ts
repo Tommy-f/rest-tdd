@@ -3,7 +3,7 @@ import { ICart } from '../interfaces/cart.interface';
 
 const CartSchema: Schema = new Schema({
   userId: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
     ref: 'Users',
   },
   products: [

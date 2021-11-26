@@ -12,7 +12,7 @@ export const getCart = async (
   next: NextFunction
 ): Promise<Response> => {
   try {
-    const userId = req.params.login;
+    const userId = req.params.userLogin;
     let cart: Document = await Carts.findOne({ userId });
     if (!cart) {
       cart = await new Carts({
@@ -34,11 +34,10 @@ export const addItemToCart = async (
   res: Response,
   next: NextFunction
 ): Promise<void> => {
-  const userId = req.params.login;
+  const userId = req.params.userLogin;
   const { productId, amount } = req.body as ICartProduct;
   try {
     let cart: ICart = await Carts.findOne({ userId });
-    console.log(cart);
     if (!cart) {
       cart = await new Carts({
         userId: userId,
