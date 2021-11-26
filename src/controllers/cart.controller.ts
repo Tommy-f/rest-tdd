@@ -33,16 +33,18 @@ export const addItemToCart = async (
   req: Request,
   res: Response,
   next: NextFunction
-): Promise<void> => {
+): Promise<Response> => {
   const userId = req.params.userLogin;
   const { productId, amount } = req.body as ICartProduct;
   try {
-    let cart: ICart = await Carts.findOne({ userId });
+    let cart: any = await Carts.findOne({ userId });
+    console.log(cart);
     if (!cart) {
       cart = await new Carts({
         userId: userId,
         products: [],
       }).save();
+      console.log(cart);
     }
 
     const product: IProduct = await Products.findOne({ productId: productId });
@@ -50,7 +52,7 @@ export const addItemToCart = async (
       throw new HttpException(404, `Product with id ${productId} not found`);
     }
 
-    const cartItem = cart.products.find((p) => p.productId === productId);
+    const cartItem = cart.products.find((p: any) => p.productId === productId);
     if (cartItem) {
       cartItem.amount += amount;
     } else {
@@ -60,7 +62,9 @@ export const addItemToCart = async (
       });
     }
 
-    // return res.status(200).json(cart);
+    await cart.save();
+
+    return res.status(200).json(cart);
   } catch (error) {
     next(error);
   }

@@ -8,9 +8,8 @@ const CartSchema: Schema = new Schema({
   },
   products: [
     {
-      productId: Number,
+      productId: String,
       amount: Number,
-      price: Number,
     },
   ],
 });
