@@ -10,7 +10,7 @@ import {
   getAllProducts,
   getProduct,
   updateProduct,
-  deleteProduct
+  deleteProduct,
 } from '../controllers/products.controller';
 import { getCart } from '../controllers/cart.controller';
 
@@ -37,7 +37,7 @@ router.delete('/users/', deleteUser);
 
 // // Cart routes
 router.get('/carts/:userLogin', getCart);
-// router.post('/carts/:userLogin/');
+router.post('/carts/:userLogin');
 // router.put('/carts/:userLogin/:id');
 // router.delete('/carts/:userLogin/:id');
 
