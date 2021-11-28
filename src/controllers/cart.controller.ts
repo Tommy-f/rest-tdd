@@ -4,6 +4,7 @@ import type { Request, Response, NextFunction } from 'express';
 import { Document } from 'mongoose';
 import { IProduct } from './../interfaces/products.interface';
 import { ICart, ICartProduct } from './../interfaces/cart.interface';
+import { deleteExistingCart } from '../services/carts.services'
 import Carts from '../models/carts.model';
 
 export const getCart = async (
@@ -114,6 +115,19 @@ export const updateItemInCart = async (
     await cart.save();
 
     return res.status(200).json(cart);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const deleteCart = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<Response> => {
+  try {
+    await deleteExistingCart(req.params.id);
+    return res.status(200).json({ message: 'Product deleted!' });
   } catch (error) {
     next(error);
   }
